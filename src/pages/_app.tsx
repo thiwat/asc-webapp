@@ -10,15 +10,13 @@ import { Toaster } from 'react-hot-toast';
 import parse from 'html-react-parser'
 import Layout from '@/components/layout';
 import { useRouter } from 'next/router';
+import { requestAuthLogin } from '@/apis/client/auth';
+import { profileAtom } from '@/atoms/profile';
 
 const prompt = Prompt({
   subsets: ['latin'],
   weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900']
 })
-
-const REQUIRE_AUTH = ['/profile', '/project']
-const NOT_REQUIRE_AUTH = ['/login'];
-
 
 const MyApp = ({ Component, pageProps }) => {
 
@@ -30,23 +28,23 @@ const MyApp = ({ Component, pageProps }) => {
     initialData()
   }, [])
 
-  const initialData = () => {
+  const initialData = async () => {
     if (pageProps.settings) {
       siteSetting.current = pageProps.settings
     }
     if (pageProps.translates) {
       setTranslate(pageProps.translates)
     }
-    if (pageProps?.token && NOT_REQUIRE_AUTH.includes(router.pathname)) {
-      return router.push('/').then(() => setTimeout(() => setLoading(false), 500))
-    }
-    if (!pageProps?.token && REQUIRE_AUTH.includes(router.pathname)) {
-      return router.push('/login').then(() => setTimeout(() => setLoading(false), 500))
-    }
+    const { profile, token } = await requestAuthLogin({ line_token: 'test' })
+    pageProps['profile'] = profile
     setLoading(false)
   }
 
-  const _setInitialState = (data) => ({ set }) => { }
+  const _setInitialState = (data) => ({ set }) => {
+    if (_get(data, 'profile')) {
+      set(profileAtom, data['profile'])
+    }
+  }
 
   const primaryColor = _get(pageProps, 'settings.site.primary_color')
     || _get(siteSetting.current, 'site.primary_color')
@@ -85,18 +83,18 @@ const MyApp = ({ Component, pageProps }) => {
         <meta name="twitter:image" content={'/images/logo.svg'}></meta>
         {parse(headerScript)}
       </Head>
-      <RecoilRoot initializeState={_setInitialState(pageProps)}>
-        {loading
-          ? <div></div>
-          :
+      {loading
+        ? <div></div>
+        :
+        <RecoilRoot initializeState={_setInitialState(pageProps)}>
           <Layout>
             <Component
               {...pageProps}
             />
             <Toaster />
           </Layout>
-        }
-      </RecoilRoot>
+        </RecoilRoot>
+      }
     </>
   )
 }
