@@ -44,7 +44,7 @@ module.exports = {
         "secondary-800": withOpacity("--color-secondary", 0.8),
         "secondary-900": withOpacity("--color-secondary", 0.9),
         line: 'rgb(205, 205, 205)',
-        font: 'rgb(49, 49, 49)',
+        font: 'rgb(109, 109, 109)',
         error: 'rgb(239, 68, 68)'
       },
       transitionProperty: {

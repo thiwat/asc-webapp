@@ -6,7 +6,7 @@ const EventsPage = () => {
 
   return (
     <>
-      <Typography type={'title'}>
+      <Typography type={'title'} className={'mb-3'}>
         {t('events_title')}
       </Typography>
       <EventList />

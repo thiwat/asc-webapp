@@ -1,7 +1,8 @@
 import _template from 'lodash/template'
 
 let TRANSLATES: object = {
-  events_title: 'Upcoming Events'
+  events_title: 'Upcoming Events',
+  event_button_buy: 'Purchase'
 }
 
 export const t = (key: string, data?: unknown): string => {
