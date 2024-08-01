@@ -18,7 +18,7 @@ const EventListItem = ({
       className={'border rounded-3xl shadow flex flex-col overflow-hidden'}
     >
       <img
-        src={item.cover}
+        src={item.cover.url}
         className={'max-h-[120px] object-cover'}
       />
       <div className={'px-3 py-2 text-gray-600 space-x-3 flex flex-row items-center'}>

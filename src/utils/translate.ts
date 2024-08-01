@@ -2,7 +2,14 @@ import _template from 'lodash/template'
 
 let TRANSLATES: object = {
   events_title: 'Upcoming Events',
-  event_button_buy: 'Purchase'
+  orders_title: 'My Orders',
+  order_status_pending_payment: 'Pending Payment',
+  order_status_paid: 'Paid',
+  order_status_canceled: 'Canceled',
+  order_status_completed: 'Completed',
+  event_button_buy: 'Purchase',
+  order_button_next: 'Next',
+  order_payment_description: '<div class="flex flex-row space-x-3"><img style="width:100px;height:100px;" src="/images/promptpay.png" /><div><div>พร้อมเพย์</div><div>1102800038877</div><div>ทิวัตธ์ นันต์จารุวงศ์</div><div>${total_amount}บาท</div></div></div>'
 }
 
 export const t = (key: string, data?: unknown): string => {

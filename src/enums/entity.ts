@@ -1,3 +1,4 @@
 export enum Entity {
-  event = 'event'
+  event = 'event',
+  order = 'order'
 }

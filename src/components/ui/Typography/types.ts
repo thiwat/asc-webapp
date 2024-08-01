@@ -1,5 +1,5 @@
 export type TypographyProps = {
   children: React.ReactNode | React.ReactNode[];
-  type?: 'title';
+  type?: 'title' | 'subtitle';
   className?: string;
 }

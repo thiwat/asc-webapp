@@ -14,8 +14,16 @@ const Typography = ({
     )
   }
 
+  if (type === 'subtitle') {
+    return (
+      <h5 className={`text-black text-md font-medium${className ? ` ${className}` : ''}`}>
+        {children}
+      </h5>
+    )
+  }
+
   return (
-    <span className={`text-sm${className ? ` ${className}` : ''}`}>
+    <span className={`text-sm font-light${className ? ` ${className}` : ''}`}>
       {children}
     </span>
   )

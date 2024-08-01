@@ -28,7 +28,7 @@ const EventBottomSheet = ({
         <Sheet.Content>
           <Sheet.Scroller draggableAt="both">
             <img
-              src={data.cover}
+              src={data.cover?.url}
               className={'w-full rounded-t-3xl'}
             />
             <div className={'p-3'}>

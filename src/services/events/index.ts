@@ -1,10 +1,15 @@
 import { requestList } from '@/apis/client/entity'
+import { requestPlaceOrder } from '@/apis/client/order'
 import { Entity } from '@/enums/entity'
+import { t } from '@/utils/translate'
 import { useRequest } from 'ahooks'
+import { useRouter } from 'next/router'
 import { useRef, useState } from 'react'
+import toast from 'react-hot-toast'
 
 export const useEvents = () => {
 
+  const router = useRouter()
   const [open, setOpen] = useState<boolean>(false)
   const [qty, setQty] = useState<number>(1)
   const eventData = useRef<any>({})
@@ -15,6 +20,25 @@ export const useEvents = () => {
       page: 1,
       page_size: 20
     }]
+  })
+
+  const placeOrderRequest = useRequest(requestPlaceOrder, {
+    manual: true,
+    onSuccess: (r) => {
+      setOpen(false)
+      toast.success(t('event_place_order_success'))
+      setTimeout(() => {
+        router.push({
+          pathname: '/orders',
+          query: {
+            order_no: r.order_no
+          }
+        })
+      }, 500)
+    },
+    onError: (e) => {
+      toast.error(e.message)
+    }
   })
 
   const onToggle = () => {
@@ -33,7 +57,10 @@ export const useEvents = () => {
   }
 
   const onPlaceOrder = () => {
-    alert(`Purchase ${qty} ticket`)
+    placeOrderRequest.run({
+      quantity: qty,
+      event: eventData.current.code
+    })
   }
 
   return {

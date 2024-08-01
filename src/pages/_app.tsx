@@ -10,8 +10,10 @@ import { Toaster } from 'react-hot-toast';
 import parse from 'html-react-parser'
 import Layout from '@/components/layout';
 import { useRouter } from 'next/router';
-import { requestAuthLogin } from '@/apis/client/auth';
 import { profileAtom } from '@/atoms/profile';
+import { requestMyProfile } from '@/apis/server/user';
+import { requestSiteSetting } from '@/apis/server/system';
+import Container from '@/components/ui/Container';
 
 const prompt = Prompt({
   subsets: ['latin'],
@@ -35,8 +37,6 @@ const MyApp = ({ Component, pageProps }) => {
     if (pageProps.translates) {
       setTranslate(pageProps.translates)
     }
-    const { profile, token } = await requestAuthLogin({ line_token: 'test' })
-    pageProps['profile'] = profile
     setLoading(false)
   }
 
@@ -88,9 +88,11 @@ const MyApp = ({ Component, pageProps }) => {
         :
         <RecoilRoot initializeState={_setInitialState(pageProps)}>
           <Layout>
-            <Component
-              {...pageProps}
-            />
+            <Container>
+              <Component
+                {...pageProps}
+              />
+            </Container>
             <Toaster />
           </Layout>
         </RecoilRoot>
@@ -105,7 +107,18 @@ MyApp.getInitialProps = async ({ ctx }) => {
   const isServer = typeof window === 'undefined'
 
   if (isServer) {
+    let accessToken = _get(ctx, 'req.cookies.token')
 
+
+    if (accessToken) {
+      const profile = await requestMyProfile({ Authorization: `Bearer ${accessToken}` })
+        .catch(e => { accessToken = '' })
+      pageProps['token'] = accessToken
+      pageProps['profile'] = profile
+    }
+
+    const siteSettings = await requestSiteSetting()
+    pageProps['settings'] = { ...siteSettings }
   }
 
   return { pageProps }
