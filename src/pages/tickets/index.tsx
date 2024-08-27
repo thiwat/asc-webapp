@@ -1,4 +1,4 @@
-import EventList from "@/components/ui/List/EventList"
+import TicketList from "@/components/ui/List/TicketList"
 import Typography from "@/components/ui/Typography"
 import { t } from "@/utils/translate"
 
@@ -9,7 +9,7 @@ const TicketsPage = () => {
       <Typography type={'title'} className={'mb-3'}>
         {t('tickets_title')}
       </Typography>
-      <EventList />
+      <TicketList />
     </>
 
   )

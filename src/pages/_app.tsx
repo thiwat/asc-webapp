@@ -1,4 +1,6 @@
 import '../styles/globals.css';
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 import _get from 'lodash/get'
 import Head from 'next/head';
 import { useEffect, useRef, useState } from 'react';
@@ -14,6 +16,7 @@ import { profileAtom } from '@/atoms/profile';
 import { requestMyProfile } from '@/apis/server/user';
 import { requestSiteSetting } from '@/apis/server/system';
 import Container from '@/components/ui/Container';
+import { settingsAtom } from '@/atoms/settings';
 
 const prompt = Prompt({
   subsets: ['latin'],
@@ -43,6 +46,9 @@ const MyApp = ({ Component, pageProps }) => {
   const _setInitialState = (data) => ({ set }) => {
     if (_get(data, 'profile')) {
       set(profileAtom, data['profile'])
+    }
+    if (_get(data, 'settings')) {
+      set(settingsAtom, data['settings'])
     }
   }
 
