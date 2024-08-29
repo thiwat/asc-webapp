@@ -5,3 +5,7 @@ export const requestSiteSetting = async (): Promise<any> => {
     Authorization: `Basic ${Buffer.from(`${process.env.APP_KEY}:${process.env.SECRET_KEY}`).toString('base64')}`
   })
 }
+
+export const requestRewriteUrl = async (path: string): Promise<any> => {
+  return request(`v1/rewrite_url/${path}`, 'GET')
+}

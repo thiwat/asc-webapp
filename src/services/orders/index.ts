@@ -11,7 +11,7 @@ export const useOrders = () => {
   const [open, setOpen] = useState<boolean>(false)
   const orderData = useRef<any>({})
 
-  const { data } = useRequest(requestList, {
+  const { data, refresh } = useRequest(requestList, {
     defaultParams: [{
       entity: Entity.order,
       page: 1,
@@ -21,6 +21,9 @@ export const useOrders = () => {
   })
 
   const onToggle = () => {
+    if (open) {
+      refresh()
+    }
     setOpen(prev => !prev)
   }
 
