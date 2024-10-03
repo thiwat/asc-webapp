@@ -14,7 +14,7 @@ import Layout from '@/components/layout';
 import { useRouter } from 'next/router';
 import { profileAtom } from '@/atoms/profile';
 import { requestMyProfile } from '@/apis/server/user';
-import { requestSiteSetting } from '@/apis/server/system';
+import { requestGetTranslate, requestSiteSetting } from '@/apis/server/system';
 import Container from '@/components/ui/Container';
 import { settingsAtom } from '@/atoms/settings';
 
@@ -115,6 +115,8 @@ MyApp.getInitialProps = async ({ ctx }) => {
   if (isServer) {
     let accessToken = _get(ctx, 'req.cookies.token')
 
+    const translates = await requestGetTranslate('site', 'en-US', {})
+    pageProps['translates'] = translates
 
     if (accessToken) {
       const profile = await requestMyProfile({ Authorization: `Bearer ${accessToken}` })

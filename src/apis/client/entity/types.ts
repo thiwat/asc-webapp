@@ -8,3 +8,8 @@ export type RequestListProps = {
   filter?: object,
   keywords?: string,
 }
+
+export type RequestDetailProps = {
+  entity: Entity,
+  id: string,
+}
