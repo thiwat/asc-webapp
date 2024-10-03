@@ -58,30 +58,6 @@ export const validateIsTrue = () => ({
   }
 })
 
-export const validatePassword = (passwordSetting: PasswordSetting) => ({ }) => ({
-  validator(_, value) {
-    if (!value) {
-      return Promise.resolve();
-    }
-    const minLength = passwordSetting?.minimum_length
-    const matchCase = passwordSetting?.case || []
-    if (value.length < minLength) {
-      return Promise.reject(
-        new Error(t('info_invalid_password_length', { lenght: minLength }))
-      )
-    }
-    for (const c of matchCase) {
-      if (!isMatchCase(value, c)) {
-        return Promise.reject(
-          new Error(t('info_password_should_contain', { c }))
-        )
-      }
-    }
-    return Promise.resolve()
-  },
-})
-
-
 export const validateCitizenId = ({ }) => {
   return {
     validator(rule, value) {
