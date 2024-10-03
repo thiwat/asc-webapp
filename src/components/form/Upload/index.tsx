@@ -7,6 +7,8 @@ import { t } from '@/utils/translate';
 const Upload = ({
   value,
   path,
+  title,
+  description,
   onChange
 }: UploadProps) => {
 
@@ -47,10 +49,10 @@ const Upload = ({
           }
         </div>
         <div className={'text-lg font-medium mt-3'}>
-          {t('upload_title')}
+          {title || t('upload_title')}
         </div>
         <div className={'font-semilight text-sm text-neutral-500'}>
-          {t('upload_description')}
+          {description || t('upload_description')}
         </div>
         <input type='file' id={'upload'} className={'hidden'} onChange={onDrop} accept={'image/*'} />
       </label>

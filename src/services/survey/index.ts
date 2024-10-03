@@ -8,6 +8,7 @@ import toast from "react-hot-toast";
 import { SurveyServiceProps } from "./types";
 import { t } from '@/utils/translate';
 import { validateEmail, validateMobileNo, validateThaiCharacter } from '@/utils/rules';
+import { requestUploadAttachment } from '@/apis/client/attachment';
 
 const useSurvey = ({
   key
@@ -51,15 +52,24 @@ const useSurvey = ({
     }
   })
 
-  const onSubmit = (values: any) => {
+  const onSubmit = async (values: any) => {
+    const answers = []
+
+    for (const key in values) {
+      let ans = values[key]
+      if (ans?.image_data) {
+        const { url } = await requestUploadAttachment(ans)
+        ans = url
+      }
+      answers.push({
+        code: key,
+        value: ans
+      })
+    }
+
     submitRequset.run({
       code: key,
-      answers: _reduce(values, (r, i, k) => {
-        if (i) {
-          r.push({ code: k, value: i })
-        }
-        return r
-      }, [])
+      answers
     })
   }
 

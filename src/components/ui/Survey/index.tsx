@@ -9,6 +9,7 @@ import { t } from "@/utils/translate"
 import { useRouter } from "next/router"
 import RadioGroup from "@/components/form/RadioGroup"
 import { SurveyProps } from "./types"
+import Upload from "@/components/form/Upload"
 
 const Survey = ({
   code
@@ -63,6 +64,11 @@ const Survey = ({
                           <RadioGroup
                             options={i.options}
                           />
+                        </FormItem>
+                      }
+                      {i.type === 'image' &&
+                        <FormItem name={i.code} label={i.label} required={i.required}>
+                          <Upload title={t('survey_upload_title')} description={t("survey_upload_description")} />
                         </FormItem>
                       }
                     </div>
