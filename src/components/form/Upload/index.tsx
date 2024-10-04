@@ -6,6 +6,7 @@ import { t } from '@/utils/translate';
 
 const Upload = ({
   value,
+  code,
   path,
   title,
   description,
@@ -25,7 +26,7 @@ const Upload = ({
 
   return (
     <div className={'flex flex-col items-center'}>
-      <label htmlFor={'upload'} className={'flex flex-col items-center'}>
+      <label htmlFor={code || 'upload'} className={'flex flex-col items-center'}>
         <div
           className={`h-[100px] w-[100px] overflow-hidden flex justify-center rounded-lg ${dragOver ? 'bg-secondary-200' : 'bg-secondary-50'}`}
           onDragOver={onDragOver}
@@ -54,7 +55,7 @@ const Upload = ({
         <div className={'font-semilight text-sm text-neutral-500'}>
           {description || t('upload_description')}
         </div>
-        <input type='file' id={'upload'} className={'hidden'} onChange={onDrop} accept={'image/*'} />
+        <input type='file' id={code || 'upload'} className={'hidden'} onChange={onDrop} accept={'image/*'} />
       </label>
     </div>
   )

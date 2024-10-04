@@ -68,7 +68,7 @@ const Survey = ({
                       }
                       {i.type === 'image' &&
                         <FormItem name={i.code} label={i.label} required={i.required}>
-                          <Upload title={t('survey_upload_title')} description={t("survey_upload_description")} />
+                          <Upload code={`upload_${i.code}`} title={t('survey_upload_title')} description={t("survey_upload_description")} />
                         </FormItem>
                       }
                     </div>

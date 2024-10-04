@@ -46,6 +46,7 @@ export const FormItem = ({
     >
       <p className={`line-clamp-1 text-sm ${label ? 'mb-1' : ''}`}>
         {label}
+        {!required && <span style={{ marginLeft: 5, fontSize: 12, color: '#bdbdbd' }}>(optional)</span>}
       </p>
       <Field {...props} rules={rules}>
         {Child}
