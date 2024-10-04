@@ -15,7 +15,7 @@ const RewriteUrlPage = () => {
     loading
   } = useRewriteUrl({ path: `${router.query.key}` })
 
-  if (loading) return null
+  if (loading || !type) return null
 
   if (type === RewriteUrlType.cms_page) {
     return (

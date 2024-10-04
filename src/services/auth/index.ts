@@ -6,9 +6,11 @@ import { useRequest } from 'ahooks'
 import { requestAuthLogin } from '@/apis/client/auth'
 import { requestMyProfile } from '@/apis/client/user'
 import { useSettingsStateValue } from '@/atoms/settings'
+import { useRouter } from 'next/router'
 
 const useAuth = () => {
 
+  const router = useRouter()
   const settings = useSettingsStateValue()
   const [profile, setProfile] = useProfileState()
 
@@ -38,7 +40,9 @@ const useAuth = () => {
       if (!settings?.line?.enable_mock_mode) {
 
         await liff.init({
-          liffId: settings.line.liff_id
+          liffId: router.pathname == '/[key]'
+            ? settings.line.liff_id_register
+            : settings.line.liff_id_tickets
         });
 
         if (!liff.isLoggedIn()) {
