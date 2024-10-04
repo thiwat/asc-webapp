@@ -48,7 +48,7 @@ const TicketBottomSheet = ({
                   </div>
                 </div>
               </div>
-              <div className={'mt-6 mb-12'}>
+              <div className={'mt-6 mb-12 overflow-x-hidden no-scrollbar pb-[30px]'}>
                 <Slider
                   dots
                   infinite={false}
@@ -65,7 +65,7 @@ const TicketBottomSheet = ({
           </Sheet.Scroller>
         </Sheet.Content>
       </Sheet.Container>
-    </Sheet>
+    </Sheet >
   )
 }
 
