@@ -113,7 +113,7 @@ MyApp.getInitialProps = async ({ ctx }) => {
   const isServer = typeof window === 'undefined'
 
   if (isServer) {
-    let accessToken = _get(ctx, 'req.cookies.token')
+    let accessToken = _get(ctx, 'req.cookies.access_token')
 
     const translates = await requestGetTranslate('site', 'en-US', {})
     pageProps['translates'] = translates
