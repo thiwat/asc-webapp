@@ -4,6 +4,14 @@ import _reduce from 'lodash/reduce'
 import _isPlainObject from 'lodash/isPlainObject'
 import { NextApiRequest, NextApiResponse } from "next";
 
+export const config = {
+  api: {
+    bodyParser: {
+      sizeLimit: '10mb'
+    }
+  }
+}
+
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === 'POST') {
     try {
