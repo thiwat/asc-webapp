@@ -87,6 +87,10 @@ const MyApp = ({ Component, pageProps }) => {
         <meta property="og:description" content={metaData?.['meta_description']}></meta>
         <meta property="og:image" content={'/images/logo.svg'}></meta>
         <meta name="twitter:image" content={'/images/logo.svg'}></meta>
+        <script src="https://unpkg.com/vconsole@latest/dist/vconsole.min.js"></script>
+        <script>
+          var vConsole = new window.VConsole();
+        </script>
         {parse(headerScript)}
       </Head>
       {loading

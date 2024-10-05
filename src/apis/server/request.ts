@@ -25,6 +25,8 @@ export const request = async (
     url += `?${params}`
   }
 
+  console.log('request', method, url, headers)
+
   const res = await fetch(url, {
     method: method.toUpperCase(),
     headers,

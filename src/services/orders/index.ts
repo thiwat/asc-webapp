@@ -21,11 +21,14 @@ export const useOrders = () => {
   })
 
   const onToggle = () => {
+    console.log('order list service', open)
     if (open) {
       refresh()
     }
     setOpen(prev => !prev)
   }
+
+  console.log('order list', data)
 
   useEffect(() => {
     if (router.query.order_no) {

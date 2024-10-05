@@ -25,6 +25,8 @@ export const request = async (
     reqPath += `?${params}`
   }
 
+  console.log('request', method, reqPath)
+
   const res = await fetch(reqPath, {
     method: method.toUpperCase(),
     headers,
