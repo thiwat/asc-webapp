@@ -8,7 +8,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       const result = await requestAuthLogin(req.body)
       const cookies = new Cookies(req, res)
       if (result?.['token']) {
-        cookies.set('token', result['token'], {
+        cookies.set('access_token', result['token'], {
           path: '/',
           sameSite: process.env.COOKIE_SAME_SITE || 'lax',
           secure: process.env.COOKIE_SECURE === 'true',

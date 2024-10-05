@@ -50,8 +50,8 @@ export const getHeadersFromRequest = (req: any) => {
 
   const cookies = new Cookies(req)
 
-  if (cookies.get('token')) {
-    res['Authorization'] = `Bearer ${cookies.get('token')}`
+  if (cookies.get('access_token')) {
+    res['Authorization'] = `Bearer ${cookies.get('access_token')}`
   }
 
   res['client-ip'] = (
