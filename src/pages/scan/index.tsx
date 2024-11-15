@@ -24,9 +24,6 @@ const ScanPage = () => {
     <>
       <Scanner
         onScan={(code) => onScan(_get(code, '0.rawValue'))}
-        styles={{
-          video: { height: '100vh' }
-        }}
       />
       {showModal &&
         <>
