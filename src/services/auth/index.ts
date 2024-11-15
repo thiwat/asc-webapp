@@ -7,12 +7,15 @@ import { requestAuthLogin } from '@/apis/client/auth'
 import { requestMyProfile } from '@/apis/client/user'
 import { useSettingsStateValue } from '@/atoms/settings'
 import { useRouter } from 'next/router'
+import { setLazyProp } from 'next/dist/server/api-utils'
 
 const useAuth = () => {
 
   const router = useRouter()
   const settings = useSettingsStateValue()
   const [profile, setProfile] = useProfileState()
+
+  const isIgnorePath = router.pathname === '/scan'
 
   const authRequest = useRequest(requestAuthLogin, {
     manual: true,
@@ -33,6 +36,9 @@ const useAuth = () => {
   }, [])
 
   const _initial = async () => {
+    if (isIgnorePath) {
+      return
+    }
     if (_isEmpty(profile)) {
 
       let accessToken = 'MOCK'
@@ -61,7 +67,9 @@ const useAuth = () => {
   }
 
   return {
-    loading: _isEmpty(profile)
+    loading: isIgnorePath
+      ? false
+      : _isEmpty(profile)
   }
 }
 

@@ -9,8 +9,9 @@ import {
 const Header = ({ }: HeaderProps) => {
 
   const router = useRouter()
+  const isIgnorePath = router.pathname === '/scan'
 
-  if (router.pathname == '/[key]') {
+  if (router.pathname == '/[key]' || isIgnorePath) {
     return (
       <div className={'flex flex-row justify-center items-center text-primary font-bold text-2xl py-2'}>
         <div>ASC</div>
