@@ -10,7 +10,6 @@ import Button from '@/components/ui/Button'
 const ScanPage = () => {
 
   const {
-    pause,
     status,
     showModal,
     onScan,
@@ -24,7 +23,6 @@ const ScanPage = () => {
   return (
     <>
       <Scanner
-        paused={pause}
         onScan={(code) => onScan(_get(code, '0.rawValue'))}
         styles={{
           video: { height: '100vh' }

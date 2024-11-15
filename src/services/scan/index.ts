@@ -1,10 +1,10 @@
 import { requestMarkUsedTicket } from "@/apis/client/ticket"
 import { useRequest } from "ahooks"
-import { useState } from "react"
+import { useRef, useState } from "react"
 
 const useScan = () => {
 
-  const [pause, setPause] = useState<boolean>(false)
+  const pause = useRef<boolean>(false)
   const [status, setStatus] = useState<string>('')
 
 
@@ -16,16 +16,17 @@ const useScan = () => {
   })
 
   const onScan = (code: string) => {
+    if (pause.current) return
+    pause.current = true
     scanRequest.run({ code })
   }
 
   const onCloseModal = () => {
-    setPause(false)
+    pause.current = false
     setStatus('')
   }
 
   return {
-    pause,
     status,
     showModal: !!status,
     onScan,
