@@ -1,3 +1,4 @@
+import React from 'react';
 import dayjs from 'dayjs'
 import Sheet from 'react-modal-sheet'
 import { TicketBottomSheetProps } from "./types";
@@ -54,10 +55,21 @@ const TicketBottomSheet = ({
                   infinite={false}
                 >
                   {(data.tickets || []).map(i => (
-                    <QRCode
+                    <div
                       key={i.code}
-                      value={i.code}
-                    />
+                      className={'relative'}
+                    >
+                      <QRCode
+                        value={i.code}
+                        style={{ opacity: i.status == 'used' ? 0.2 : 1.0 }}
+                        className={'mx-auto'}
+                      />
+                      {i.status == 'used' &&
+                        <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white px-6 py-3 rounded shadow'>
+                          <div>Used</div>
+                        </div>
+                      }
+                    </div>
                   ))}
                 </Slider>
               </div>
